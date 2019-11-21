@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import BusinessComponent from '../../components/Business/Business';
 import Header from '../../components/Header/Header';
 import Review from '../../components/Review/Review';
-import WordCloud from '../../components/WordCloud/WordCloud';
+import Map from '../../components/Map/Map';
 import Unavailable from '../../components/Unavailable/Unavailable';
 import { bookmarkBusiness, deleteBookmark, fetchReviews } from '../../actions';
 import './Business.scss';
@@ -50,7 +50,7 @@ class Business extends Component {
                      <Unavailable /> :
                     <main className="business-main">
                         <section className="business-analysis">
-                            <WordCloud id={this.props.match.params.businessId} />
+                            <Map />
                         </section>
                         <section className="business-data">
                                 <BusinessComponent business={this.props.business} />
