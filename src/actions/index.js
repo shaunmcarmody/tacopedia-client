@@ -109,7 +109,6 @@ export const locationSearch = location => dispatch => {
       dispatch({ type: GET_LOCATION_SUCCESS, payload: res.data.businesses });
     })
     .catch(err => {
-      console.log(err)
       dispatch({ type: GET_LOCATION_FAILURE, payload: err.message });
     });
 }
