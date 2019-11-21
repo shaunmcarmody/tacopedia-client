@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import queryString from 'query-string'
 import { locationSearch } from '../../actions';
-import Business from '../../components/Business/Business';
 import Header from '../../components/Header/Header';
-import Map from '../../components/Map/Map';
-import Unavailable from '../../components/Unavailable/Unavailable';
+import List from '../../components/List/List';
+import Loading from '../../components/Loading/Loading';
+
+
 import './Results.scss';
 
 
@@ -26,29 +27,16 @@ class Results extends Component {
             <>
                 <Header />
                 {
-                    this.props.businesses.length < 1 ?
-                    <Unavailable /> : null
+                    this.props.pending ? <Loading /> : <List />
                 }
-                <main className="businesses-main">
-                    <section className="businesses-map">
-                        <Map />
-                    </section>
-                    <section className="businesses-results">
-                        {
-                            this.props.businesses.map(business => <Business key={business.id} business={business} />)
-                        }
-                    </section>
-                </main>
-                <main>
-
-                </main>
            </>
         )
     }
 }
 
 const mapStateToProps = state => ({
-    businesses: state.businesses
+    businesses: state.businesses,
+    pending: state.searchingLocation
 });
 
 export default connect(mapStateToProps, { locationSearch })(withRouter(Results));
