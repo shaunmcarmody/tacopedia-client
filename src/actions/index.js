@@ -90,7 +90,6 @@ export const fetchReviews = id => dispatch => {
       .get(`${process.env.REACT_APP_URL}/api/yelp/${id}`)
       .then(res =>  {
           dispatch({ type: GET_REVIEWS_SUCCESS });
-          console.log(res.data)
           if (res.data.reviews) {
               return res.data.reviews
           } else {
@@ -103,7 +102,6 @@ export const fetchReviews = id => dispatch => {
 }
 
 export const locationSearch = location => dispatch => {
-  console.log(process.env.REACT_APP_URL)
   dispatch({ type: GET_LOCATION_REQUEST });
   return axios
     .get(`${process.env.REACT_APP_URL}/api/yelp?location=${location}`)
