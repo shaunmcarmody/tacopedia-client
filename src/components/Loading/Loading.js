@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Main = styled.main`
@@ -23,20 +22,6 @@ const Title = styled.h1`
     margin-left: 10px;
     margin-top: 10px;
     text-align: center;
-`;
-
-const Button = styled.button`
-    border-radius: 8px;
-    color: white;
-    cursor: pointer;
-    display: block;
-    font-size: 1.4rem;
-    font-weight: 500;
-    margin: auto;
-    margin-top: 20px;
-    padding: 3px 20px;
-    letter-spacing: 0.05rem;
-    background-color: #d32323;
 `;
 
 const Loading = () => (
