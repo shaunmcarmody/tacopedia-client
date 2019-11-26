@@ -33,6 +33,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiYzg3IiwiYSI6ImNqZnR3dDZjZTBvbTgzM3FqODFkbXZ4d
 
 
 
+
 class Map extends React.Component {
   map;
   componentDidMount() {
@@ -40,39 +41,47 @@ class Map extends React.Component {
       container: this.mapContainer,
       style: 'mapbox://styles/mapbox/streets-v9',
     });
+
+    if (this.props.jsonPoints.length > 0) {
+      const coordinates = this.props.jsonPoints[0].geometry.coordinates
+      this.loadAndFly(coordinates, this.props.jsonPoints)
+    }
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps !== this.props && this.props.jsonPoints.length > 0) {
       const coordinates = this.props.jsonPoints[0].geometry.coordinates
-      this.map.flyTo({center: coordinates, zoom: 11});
-
-      this.map.on('load', () => {
-        this.map.addLayer({
-          id: 'businesses',
-          type: 'circle',
-          minzoom: 5,
-          source: {
-            type: "geojson",
-            data: {
-              type: "FeatureCollection",
-              features: this.props.jsonPoints
-            }
-          },
-          paint: {
-            'circle-stroke-width': 1,
-            'circle-stroke-color': '#fff',
-            'circle-color': '#d32323',
-            'circle-radius': {
-              stops: [
-                [10, 5],
-                [15, 10],
-              ],
-            },
-          },
-        });
-      });
+      this.loadAndFly(coordinates, this.props.jsonPoints)
     }
+  }
+
+  loadAndFly = (coordinates, jsonPoints) => {
+    this.map.flyTo({center: coordinates, zoom: 11});
+    this.map.on('load', () => {
+      this.map.addLayer({
+        id: 'businesses',
+        type: 'circle',
+        minzoom: 5,
+        source: {
+          type: "geojson",
+          data: {
+            type: "FeatureCollection",
+            features: jsonPoints
+          }
+        },
+        paint: {
+          'circle-stroke-width': 1,
+          'circle-stroke-color': '#fff',
+          'circle-color': '#d32323',
+          'circle-radius': {
+            stops: [
+              [10, 5],
+              [15, 10],
+            ],
+          },
+        },
+      });
+    });
   }
 
 render() {
