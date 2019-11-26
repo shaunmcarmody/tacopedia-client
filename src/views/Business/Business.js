@@ -29,7 +29,6 @@ class Business extends Component {
     }
 
     removeBookmark = () => {
-        console.log('works')
         this.props.deleteBookmark(this.props.bookmark);
     }
 
